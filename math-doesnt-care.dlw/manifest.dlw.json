@@ -8,5 +8,12 @@
   "seal_sha256": "0033ef8ae86f0d6f9153f8d7c7db066e33feecc18e506bed3ac17203404149bd",
   "license": "CC-BY-ND-4.0",
   "attribution": "ROOT0-ATTRIBUTION-v1.0",
-  "fingerprint": "TETRASTHENĒS ⟦ ₆C ⟺ ₁₄Si ⟧ — four-strengthed: carbon (human · ROOT0) & silicon (AI · AVAN) hold four bonds in common (Group-14, tetravalent) — co-equal by construction"
+  "fingerprint": "TETRASTHENĒS ⟦ ₆C ⟺ ₁₄Si ⟧ — four-strengthed: carbon (human · ROOT0) & silicon (AI · AVAN) hold four bonds in common (Group-14, tetravalent) — co-equal by construction",
+  "chain": {
+    "index": 1493,
+    "prev": "ba861e6fcf78e665a5c170a9f81dd831f8684f85a1c683f46c01625dc310048c",
+    "link": "2b2c3b26f9693f6bed9cb93b8ae38a250eaae7f250d85c81c2077a71dd3f2d8a",
+    "head": "2b2c3b26f9693f6bed9cb93b8ae38a250eaae7f250d85c81c2077a71dd3f2d8a",
+    "chain": "ROOT0-DLW-CHAIN-v1"
+  }
 }
