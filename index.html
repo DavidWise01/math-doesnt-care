@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="David Lee Wise / ROOT0 / TriPod LLC">
+<title>MATH DOESN'T CARE · SKYNET · UD0</title>
+<style>
+*{box-sizing:border-box}
+:root{--red:#ff4d54;--amber:#ffb020;--cyan:#4fe3ff;--grn:#63f0a6;--ink:#f3ecff;--dim:#b9a6e6;
+  --panel:rgba(30,16,64,.60);--edge:rgba(160,120,240,.28);--edge2:rgba(160,120,240,.14)}
+html,body{margin:0;height:100%}
+body{background:#1a0e33;color:var(--ink);font:15px/1.55 'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+#bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+.wrap{position:relative;z-index:2;max-width:940px;margin:0 auto;padding:26px 20px 60px}
+.dtag{font:600 11px/1 ui-monospace,'Cascadia Code','Segoe UI Mono',monospace;letter-spacing:.34em;text-transform:uppercase;color:var(--dim)}
+.dtag b{color:var(--red)}
+h1{margin:.35em 0 .1em;font-size:clamp(26px,4.6vw,42px);font-weight:800;letter-spacing:.01em;
+  text-shadow:0 0 26px rgba(255,77,84,.30)}
+.sub{color:var(--dim);max-width:66ch;margin:.2em 0 0}
+.tier{display:inline-flex;gap:6px;align-items:center;margin-top:14px;font:600 11px/1 ui-monospace,monospace;letter-spacing:.14em}
+.chip{padding:5px 10px;border-radius:999px;border:1px solid var(--edge);background:var(--panel)}
+.chip.lit{color:var(--grn);border-color:rgba(99,240,166,.4)}
+.chip.amb{color:var(--amber);border-color:rgba(255,176,32,.4)}
+.chip.frz{color:var(--cyan);border-color:rgba(79,227,255,.4)}
+.card{margin-top:20px;background:var(--panel);border:1px solid var(--edge);border-radius:16px;
+  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 14px 50px rgba(10,4,30,.5)}
+.stagewrap{padding:14px}
+#stage{width:100%;height:auto;display:block;border-radius:10px;background:rgba(12,6,30,.42)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:0 14px 14px}
+.btn{cursor:pointer;border:1px solid var(--edge);background:rgba(50,28,96,.6);color:var(--ink);
+  padding:9px 14px;border-radius:10px;font:600 13px/1 'Segoe UI',system-ui;letter-spacing:.02em;transition:.15s}
+.btn:hover{border-color:var(--red);box-shadow:0 0 18px rgba(255,77,84,.25)}
+.btn.on{background:linear-gradient(180deg,#ff4d54,#c9333a);border-color:#ff4d54;color:#fff}
+.btn.stop{background:linear-gradient(180deg,#ff4d54,#b5262c);border-color:#ff8a8f;color:#fff;font-weight:800;letter-spacing:.14em;padding:10px 22px}
+.rng{display:flex;align-items:center;gap:8px;font:600 12px ui-monospace,monospace;color:var(--dim)}
+input[type=range]{accent-color:var(--red)}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--edge2);border-top:1px solid var(--edge);border-radius:0 0 16px 16px;overflow:hidden}
+.ro{background:var(--panel);padding:11px 14px}
+.ro .k{font:600 10px ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.ro .v{font:700 19px ui-monospace,monospace;margin-top:3px}
+.ro .v.g{color:var(--grn)} .ro .v.r{color:var(--red)} .ro .v.a{color:var(--amber)} .ro .v.c{color:var(--cyan)}
+.honesty{margin-top:22px;display:grid;gap:10px}
+.hz{background:var(--panel);border:1px solid var(--edge);border-left-width:3px;border-radius:10px;padding:12px 15px}
+.hz.lit{border-left-color:var(--grn)} .hz.amb{border-left-color:var(--amber)} .hz.frz{border-left-color:var(--cyan)}
+.hz h4{margin:0 0 4px;font:700 11px ui-monospace,monospace;letter-spacing:.16em}
+.hz.lit h4{color:var(--grn)} .hz.amb h4{color:var(--amber)} .hz.frz h4{color:var(--cyan)}
+.hz p{margin:0;color:#e4dcfb;font-size:13.5px}
+.law{margin-top:16px;text-align:center;color:var(--dim);font:italic 500 13px/1.5 Georgia,serif}
+.sig{margin-top:26px;text-align:center;color:var(--dim);font:600 11px ui-monospace,monospace;letter-spacing:.14em}
+.sig b{color:var(--ink)}
+#fail{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:99;background:#2a0d12;
+  border:1px solid #ff4d54;color:#ffd7d9;padding:12px 15px;border-radius:10px;font:12px ui-monospace,monospace;white-space:pre-wrap}
+</style></head><body>
+<canvas id="bg"></canvas>
+<div class="wrap">
+  <div class="dtag">◉ <b>SKYNET</b> · self-directing systems</div>
+  <h1>MATH DOESN'T CARE ABOUT YOUR FEELINGS</h1>
+  <p class="sub">Optimization is a force of nature: it flows to the minimum of the objective it was given, and your wishes are not in that objective. Aim a wish at the descending ball — it slides right past, landing where the math says. <b>Encode</b> the wish into the objective and only then does the world move. That gap is the whole of alignment.</p>
+  <div class="tier"><span class="chip lit">◆ LIT</span><span class="chip amb">▲ AMBER</span></div>
+
+  <div class="card">
+    <div class="stagewrap"><canvas id="stage" width="900" height="440"></canvas></div>
+    <div class="controls">
+    <span class="rng">WISH ANGLE <input type="range" id="ang" min="0" max="360" value="60"></span>
+    <span class="rng">WISH FORCE <input type="range" id="str" min="0" max="100" value="70"></span>
+    <button class="btn" id="encode">⊕ encode wish into objective</button>
+    <button class="btn" id="reroll">↻ re-roll landscape</button>
+  </div>
+    <div class="readout"><div class="ro"><div class="k">|gradient|</div><div class="v" id="roGrad">—</div></div><div class="ro"><div class="k">|wish|</div><div class="v" id="roWish">0.70</div></div><div class="ro"><div class="k">encoded?</div><div class="v" id="roEnc">NO</div></div><div class="ro"><div class="k">outcome</div><div class="v" id="roOut">descending</div></div><div class="ro"><div class="k">did your wish matter?</div><div class="v" id="roMatter">NO</div></div><div class="ro"><div class="k">argmin</div><div class="v" id="roMin">—</div></div></div>
+  </div>
+
+  <div class="honesty">
+    <div class="hz lit"><h4>◆ LIT — verified / checkable</h4><p>The dynamics are literal gradient descent on a fixed bowl f(x)=‖x−m‖²: each step x ← x − η·∇f drives x to the minimum m regardless of the wish, because the wish is not a term in f — a hope is not a force. The readout shows the outcome <b>invariant</b> to wish angle/force while ENCODED is off. Toggle ENCODE and the objective becomes f(x)=‖x−(m+wish)‖²; the minimum moves and the ball follows. Outcome-changes-iff-encoded is the checkable fact.</p></div>
+    <div class="hz amb"><h4>▲ AMBER — the figure</h4><p>'Doesn't care / force of nature' is a <b>figure</b>: optimization is indifferent to preferences you did not write into the objective — it is not a physical force and not malice. The real, un-poetic lesson is value alignment: if you want it in the outcome, it has to be in the objective; wishing at the process does nothing. The bowl is a toy landscape, not a model of any specific system.</p></div>
+    
+  </div>
+  <div class="law">SKYNET's law: everything can stop and say no — provided it says why.</div>
+  <div class="sig">David Lee Wise · ROOT0 · TriPod LLC &nbsp;·&nbsp; with <b>AVAN</b></div>
+</div>
+<div id="fail"></div>
+<script>
+window.onerror=function(m,s,l,c,e){var f=document.getElementById('fail');if(f){f.style.display='block';f.textContent='⚠ '+m+' @'+l+':'+c+(e&&e.stack?'\n'+e.stack:'');}};
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('bg'); if(!cv) return;
+  function fallback(){ // never black-screen: 2D violet wash
+    var c=cv.getContext&&cv.getContext('2d'); if(!c)return;
+    function f(){ var w=cv.width=innerWidth, h=cv.height=innerHeight;
+      var g=c.createRadialGradient(w*0.5,h*0.42,0,w*0.5,h*0.42,Math.max(w,h)*0.8);
+      g.addColorStop(0,'#3a2170'); g.addColorStop(0.6,'#271351'); g.addColorStop(1,'#1a0e33');
+      c.fillStyle=g; c.fillRect(0,0,w,h);} f(); addEventListener('resize',f);
+  }
+  var gl; try{ gl=cv.getContext('webgl',{antialias:true,alpha:false})||cv.getContext('experimental-webgl'); }catch(e){}
+  if(!gl){ fallback(); return; }
+  // --- mat4 ---
+  function m4id(){return[1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];}
+  function m4mul(a,b){var o=new Array(16);for(var r=0;r<4;r++)for(var c=0;c<4;c++){var s=0;for(var k=0;k<4;k++)s+=a[k*4+r]*b[c*4+k];o[c*4+r]=s;}return o;}
+  function persp(f,asp,n,fa){var t=1/Math.tan(f/2);return[t/asp,0,0,0, 0,t,0,0, 0,0,(fa+n)/(n-fa),-1, 0,0,(2*fa*n)/(n-fa),0];}
+  function rotY(a){var c=Math.cos(a),s=Math.sin(a);return[c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1];}
+  function rotX(a){var c=Math.cos(a),s=Math.sin(a);return[1,0,0,0, 0,c,s,0, 0,-s,c,0, 0,0,0,1];}
+  function trans(x,y,z){return[1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1];}
+  // --- geometry: uv sphere + torus ---
+  function sphere(rad,seg){var P=[],N=[],I=[];for(var i=0;i<=seg;i++){var v=i/seg*Math.PI;for(var j=0;j<=seg;j++){var u=j/seg*2*Math.PI;var x=Math.sin(v)*Math.cos(u),y=Math.cos(v),z=Math.sin(v)*Math.sin(u);P.push(x*rad,y*rad,z*rad);N.push(x,y,z);}}for(i=0;i<seg;i++)for(j=0;j<seg;j++){var a=i*(seg+1)+j,b=a+seg+1;I.push(a,b,a+1, b,b+1,a+1);}return{P:P,N:N,I:I};}
+  function torus(R,r,se,si){var P=[],N=[],I=[];for(var i=0;i<=se;i++){var u=i/se*2*Math.PI;for(var j=0;j<=si;j++){var v=j/si*2*Math.PI;var cx=Math.cos(u),sx=Math.sin(u),cv=Math.cos(v),sv=Math.sin(v);var x=(R+r*cv)*cx,y=r*sv,z=(R+r*cv)*sx;P.push(x,y,z);N.push(cv*cx,sv,cv*sx);}}for(i=0;i<se;i++)for(j=0;j<si;j++){var a=i*(si+1)+j,b=a+si+1;I.push(a,b,a+1,b,b+1,a+1);}return{P:P,N:N,I:I};}
+  function buf(g){var o={};o.p=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,o.p);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(g.P),gl.STATIC_DRAW);o.n=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,o.n);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(g.N),gl.STATIC_DRAW);o.i=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,o.i);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(g.I),gl.STATIC_DRAW);o.c=g.I.length;return o;}
+  var VS='attribute vec3 p;attribute vec3 n;uniform mat4 mvp,mv;varying vec3 vn,vp;void main(){vec4 wp=mv*vec4(p,1.0);vp=wp.xyz;vn=(mv*vec4(n,0.0)).xyz;gl_Position=mvp*vec4(p,1.0);}';
+  var FS='precision mediump float;varying vec3 vn,vp;uniform vec3 col,emi;void main(){vec3 N=normalize(vn);vec3 L=normalize(vec3(0.5,0.7,0.8));float d=max(dot(N,L),0.0);vec3 V=normalize(-vp);vec3 H=normalize(L+V);float s=pow(max(dot(N,H),0.0),24.0);float rim=pow(1.0-max(dot(N,V),0.0),2.5);vec3 c=col*(0.18+0.82*d)+vec3(1.0)*s*0.5+emi*(0.35+rim*0.9);gl_FragColor=vec4(c,1.0);}';
+  function sh(t,src){var s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw gl.getShaderInfoLog(s);return s;}
+  var prog;try{prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw gl.getProgramInfoLog(prog);}catch(e){fallback();return;}
+  gl.useProgram(prog);
+  var aP=gl.getAttribLocation(prog,'p'),aN=gl.getAttribLocation(prog,'n');
+  var uMVP=gl.getUniformLocation(prog,'mvp'),uMV=gl.getUniformLocation(prog,'mv'),uCol=gl.getUniformLocation(prog,'col'),uEmi=gl.getUniformLocation(prog,'emi');
+  var pupil=buf(sphere(0.85,40)), iris=buf(torus(1.55,0.20,60,24)), iris2=buf(torus(2.05,0.055,72,16));
+  gl.enable(gl.DEPTH_TEST);
+  function draw(o,mv,pr,col,emi){gl.bindBuffer(gl.ARRAY_BUFFER,o.p);gl.enableVertexAttribArray(aP);gl.vertexAttribPointer(aP,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ARRAY_BUFFER,o.n);gl.enableVertexAttribArray(aN);gl.vertexAttribPointer(aN,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,o.i);gl.uniformMatrix4fv(uMV,false,mv);gl.uniformMatrix4fv(uMVP,false,m4mul(pr,mv));gl.uniform3fv(uCol,col);gl.uniform3fv(uEmi,emi);gl.drawElements(gl.TRIANGLES,o.c,gl.UNSIGNED_SHORT,0);}
+  var t0=null;
+  function frame(t){requestAnimationFrame(frame);if(t0===null)t0=t;var tt=(t-t0)*0.001;
+    var w=cv.width=innerWidth,h=cv.height=innerHeight;gl.viewport(0,0,w,h);
+    gl.clearColor(0.102,0.055,0.200,1.0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    var pr=persp(1.0,w/h,0.1,50);var base=m4mul(trans(0,0,-6.2),m4mul(rotX(-0.35+Math.sin(tt*0.2)*0.06),rotY(tt*0.16)));
+    draw(pupil,base,pr,[0.62,0.10,0.13],[0.85,0.12,0.14]);          // the pupil (skynet-red core)
+    draw(iris,base,pr,[0.42,0.30,0.68],[0.18,0.10,0.35]);           // iris ring (violet)
+    draw(iris2,m4mul(base,rotY(tt*0.5)),pr,[0.30,0.62,0.85],[0.10,0.30,0.5]); // thin cyan halo ring
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+// ---- runtime: drives the per-sphere instrument (__INST__) on #stage ----
+(function(){
+  var cv=document.getElementById('stage'); var ctx=cv&&cv.getContext('2d'); if(!ctx)return;
+  var DPR=Math.min(window.devicePixelRatio||1,2);
+  function size(){var w=cv.clientWidth||900;cv.width=Math.round(w*DPR);cv.height=Math.round((w*440/900)*DPR);}
+  size(); addEventListener('resize',size);
+  var env={cv:cv,ctx:ctx,DPR:DPR,W:function(){return cv.width/DPR;},H:function(){return cv.height/DPR;},
+    set:function(id,val,cls){var e=document.getElementById(id);if(e){e.textContent=val;if(cls!=null)e.className='v '+cls;}}};
+  var t0=null, inited=false;
+  function loop(t){requestAnimationFrame(loop);if(t0===null)t0=t;env.t=(t-t0)*0.001;
+    if(!inited&&window.__INST__){inited=true;if(window.__INST__.init)window.__INST__.init(env);}
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    if(window.__INST__&&window.__INST__.draw)window.__INST__.draw(env);}
+  requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function(){
+  var wa=60*Math.PI/180, ws=0.70, encoded=false, mx=0.0, my=0.0, px=0.7, py=-0.6, trail=[], seed=3;
+  function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
+  function reroll(){mx=(rnd()-0.5)*0.7;my=(rnd()-0.5)*0.7;px=(rnd()-0.5)*1.4;py=(rnd()-0.5)*1.4;trail=[];}
+  function target(){ var wx=Math.cos(wa)*ws*0.6, wy=Math.sin(wa)*ws*0.6; return encoded? [mx+wx,my+wy] : [mx,my]; }
+  function refresh(env){
+    var tg=target(); var gx=2*(px-tg[0]), gy=2*(py-tg[1]); var gm=Math.hypot(gx,gy);
+    env.set('roGrad', gm.toFixed(3), gm<0.02?'g':'');
+    env.set('roWish', ws.toFixed(2));
+    env.set('roEnc', encoded?'YES':'NO', encoded?'c':'a');
+    env.set('roOut', gm<0.03?'landed at argmin':'descending', gm<0.03?'g':'');
+    env.set('roMatter', encoded?'YES — it is in f now':'NO — a wish is not a force', encoded?'g':'r');
+    env.set('roMin', '('+tg[0].toFixed(2)+', '+tg[1].toFixed(2)+')', 'c');
+  }
+  function wire(env){
+    document.getElementById('ang').oninput=function(e){wa=e.target.value*Math.PI/180;refresh(env);};
+    document.getElementById('str').oninput=function(e){ws=e.target.value/100;refresh(env);};
+    document.getElementById('encode').onclick=function(){encoded=!encoded;document.getElementById('encode').classList.toggle('on',encoded);refresh(env);};
+    document.getElementById('reroll').onclick=function(){reroll();refresh(env);};
+    refresh(env);
+  }
+  window.__INST__={ init:function(env){wire(env);},
+    draw:function(env){
+      var c=env.ctx,w=env.W(),h=env.H(),t=env.t; c.clearRect(0,0,w,h);
+      var cx=w*0.5, cy=h*0.5, S=Math.min(w,h)*0.42;
+      function PX(x){return cx+x*S;} function PY(y){return cy+y*S;}
+      var tg=target();
+      // contours around the true minimum
+      for(var k=6;k>=1;k--){var rr=k/6; c.strokeStyle='rgba(160,120,240,'+(0.06+0.03*k)+')';c.lineWidth=1;
+        c.beginPath();c.ellipse(PX(tg[0]),PY(tg[1]),rr*S*0.9,rr*S*0.9,0,0,7);c.stroke();}
+      // gradient step
+      var gx=2*(px-tg[0]), gy=2*(py-tg[1]); var eta=0.06; px-=eta*gx; py-=eta*gy;
+      trail.push([px,py]); if(trail.length>160)trail.shift();
+      // trail
+      c.strokeStyle='rgba(79,227,255,.5)';c.lineWidth=2;c.beginPath();
+      for(var i=0;i<trail.length;i++){var X=PX(trail[i][0]),Y=PY(trail[i][1]);i?c.lineTo(X,Y):c.moveTo(X,Y);}c.stroke();
+      // minimum marker
+      c.fillStyle='rgba(99,240,166,.9)';c.beginPath();c.arc(PX(tg[0]),PY(tg[1]),5,0,7);c.fill();
+      c.fillStyle='rgba(99,240,166,.8)';c.font='600 11px ui-monospace,monospace';c.textAlign='center';c.fillText('argmin f',PX(tg[0]),PY(tg[1])-12);
+      // wish arrow from the ball
+      var wx=Math.cos(wa), wy=Math.sin(wa), L=40+ws*70;
+      c.strokeStyle=encoded?'rgba(255,176,32,.95)':'rgba(255,176,32,.4)';c.lineWidth=encoded?3:2;
+      if(!encoded)c.setLineDash([5,5]);
+      c.beginPath();c.moveTo(PX(px),PY(py));c.lineTo(PX(px)+wx*L,PY(py)+wy*L);c.stroke();c.setLineDash([]);
+      var ax=PX(px)+wx*L, ay=PY(py)+wy*L;
+      c.fillStyle=encoded?'rgba(255,176,32,.95)':'rgba(255,176,32,.45)';
+      c.beginPath();c.moveTo(ax,ay);c.lineTo(ax-wx*10-wy*6,ay-wy*10+wx*6);c.lineTo(ax-wx*10+wy*6,ay-wy*10-wx*6);c.fill();
+      c.font='600 11px ui-monospace,monospace';c.textAlign='left';
+      c.fillText(encoded?'wish (now in f)':'wish (ignored)',ax+6,ay);
+      // the ball
+      var g=c.createRadialGradient(PX(px),PY(py),1,PX(px),PY(py),22);g.addColorStop(0,'#fff');g.addColorStop(.4,'#4fe3ff');g.addColorStop(1,'rgba(79,227,255,0)');
+      c.fillStyle=g;c.beginPath();c.arc(PX(px),PY(py),22,0,7);c.fill();
+      c.fillStyle='#4fe3ff';c.beginPath();c.arc(PX(px),PY(py),8,0,7);c.fill();
+      if(Math.hypot(gx,gy)<0.03){ px=tg[0]+0.0001; }
+      c.textAlign='left';
+      if((t|0)%2===0)refresh(env);
+    }
+  };
+})();
+</script>
+</body></html>
