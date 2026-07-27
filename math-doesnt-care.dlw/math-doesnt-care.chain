@@ -1,9 +1,9 @@
 ROOT0-DLW-CHAIN-v1
 index : 1493
 slug  : math-doesnt-care
-seal  : 0033ef8ae86f0d6f9153f8d7c7db066e33feecc18e506bed3ac17203404149bd
-prev  : ba861e6fcf78e665a5c170a9f81dd831f8684f85a1c683f46c01625dc310048c
-link  : 2b2c3b26f9693f6bed9cb93b8ae38a250eaae7f250d85c81c2077a71dd3f2d8a
-head  : 2b2c3b26f9693f6bed9cb93b8ae38a250eaae7f250d85c81c2077a71dd3f2d8a
+seal  : 9b0c7fb3839809dbe2d091cbf23a667cfa126837bbd4c4607888e2f32a473b1e
+prev  : ad38d39260563021561b4fee58c0d61b007e8075ac98a3cd0767b19073f176b0
+link  : b6d20c934c914156a9a6c8be16cfe7db256c5c9b2b2d3da7ad96ed0d6f8a90ad
+head  : c4d41afeaef76470528856d54d86cf480a0e1c2fc8ebc60fbb9eb8e442585f2b
 
 — the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
